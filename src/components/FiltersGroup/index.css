@@ -1,0 +1,54 @@
+.employment-list-item-container {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  margin-top: 16px;
+  cursor: pointer;
+}
+.employment-heading {
+  font-size: 22px;
+  color: #f8fafc;
+  margin-top: 24px;
+}
+@media screen and (min-width: 768px) {
+  .employment-heading {
+    margin-top: 32px;
+  }
+}
+.employment-list {
+  padding-left: 0;
+}
+.checkboxLabel {
+  font-size: 18px;
+  color: #f8fafc;
+  margin-left: 8px;
+}
+.salary-list-item-container {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  margin-top: 16px;
+  cursor: pointer;
+}
+.salary-heading {
+  font-size: 22px;
+  color: #f8fafc;
+  margin-top: 24px;
+}
+@media screen and (min-width: 768px) {
+  .salary-heading {
+    margin-top: 32px;
+  }
+}
+.salary-list {
+  padding-left: 0;
+}
+.radioLabel {
+  font-size: 18px;
+  color: #f8fafc;
+  margin-left: 8px;
+}
+.hr-line {
+  width: 100%;
+  border-top: 1px solid #cbd5e1;
+}

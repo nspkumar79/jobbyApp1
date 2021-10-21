@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import FiltersGroup from '../FiltersGroup'
 import Profile from '../Profile'
 import SearchFilter from '../SearchFilter'
+import JobCard from '../JobCard'
 
 import './index.css'
 
@@ -106,7 +107,7 @@ class AllJobsSection extends Component {
     })
     const jwtToken = Cookies.get('jwt_token')
     const {searchInput, activeEmploymentId, activePackageId} = this.state
-    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${activeEmploymentId}&minimum_package=${activePackageId}&search=${searchInput}`
+    const apiUrl = 'https://apis.ccbp.in/jobs'
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -118,12 +119,14 @@ class AllJobsSection extends Component {
       const fetchedData = await response.json()
       const updatedData = fetchedData.jobs.map(job => ({
         companyLogoUrl: job.company_logo_url,
+        employmentType: job.employment_type,
         jobDescription: job.job_description,
         location: job.location,
         packagePerAnnum: job.package_per_annum,
         rating: job.rating,
         title: job.title,
       }))
+
       this.setState({
         jobsList: updatedData,
         apiStatus: apiStatusConstants.success,
@@ -135,12 +138,23 @@ class AllJobsSection extends Component {
     }
   }
 
-  enterSearchInput = () => {
+  onEnterSearchInput = () => {
     this.getJobs()
   }
 
-  changeSearchInput = searchInput => {
+  onChangeSearchInput = searchInput => {
     this.setState({searchInput})
+  }
+
+  renderJobsListView = () => {
+    const {jobsList} = this.state
+    return (
+      <ul className="job-items-list-container">
+        {jobsList.map(eachJob => (
+          <JobCard eachJob={eachJob} />
+        ))}
+      </ul>
+    )
   }
 
   renderFailureView = () => {
@@ -148,24 +162,26 @@ class AllJobsSection extends Component {
       this.getJobs()
     }
     return (
-         <div className="jobs-error-view-container">
-            <img
-                src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-                alt="failure view"
-                className="jobs-failure-img"
-            />
-            <h1 className="jobs-failure-heading-text">Oops! Something Went Wrong</h1>
-            <p className="jobs-failure-description">
-                We cannot seem to find the page you are looking for.
-            </p>
-            <button
-                type="button"
-                className="retry-button-job"
-                onClick={retryJobClicked}
-            >
-                Retry
-            </button>
-         </div>
+      <div className="jobs-error-view-container">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+          alt="failure view"
+          className="jobs-failure-img"
+        />
+        <h1 className="jobs-failure-heading-text">
+          Oops! Something Went Wrong
+        </h1>
+        <p className="jobs-failure-description">
+          We cannot seem to find the page you are looking for.
+        </p>
+        <button
+          type="button"
+          className="retry-button-job"
+          onClick={retryJobClicked}
+        >
+          Retry
+        </button>
+      </div>
     )
   }
 
@@ -180,7 +196,7 @@ class AllJobsSection extends Component {
 
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderProductsListView()
+        return this.renderJobsListView()
       case apiStatusConstants.failure:
         return this.renderFailureView()
       case apiStatusConstants.inProgress:
@@ -204,7 +220,7 @@ class AllJobsSection extends Component {
       <button
         type="button"
         className="retry-button-job"
-        onClick={retryProfileClicked}
+        onClick={this.retryProfileClicked}
       >
         Retry
       </button>
@@ -230,22 +246,28 @@ class AllJobsSection extends Component {
     const {searchInput} = this.state
     return (
       <div className="all-jobs-section">
-        <div className="search-container-mobile">
-          <SearchFilter
-            searchInput={searchInput}
-            changeSearchInput={this.changeSearchInput}
-            enterSearchInput={this.enterSearchInput}
-          />
-        </div>
-        <div className="user-filter-container">
-          {this.renderProfile()}
-          <FiltersGroup />
-        </div>
-        <div className="jobs-container">
-          <div className="search-container-large">
-            <SearchFilter />
+        <div className="all-jobs-responsive-container">
+          <div className="search-container-mobile">
+            <SearchFilter
+              searchInput={searchInput}
+              changeSearchInput={this.onChangeSearchInput}
+              enterSearchInput={this.onEnterSearchInput}
+            />
           </div>
-          {this.renderAllJobs()}
+          <div className="user-filter-container">
+            {this.renderProfile()}
+            <hr className="hr-line" />
+            <FiltersGroup
+              employmentTypesList={employmentTypesList}
+              salaryRangesList={salaryRangesList}
+            />
+          </div>
+          <div className="jobs-container">
+            <div className="search-container-large">
+              <SearchFilter />
+            </div>
+            {this.renderAllJobs()}
+          </div>
         </div>
       </div>
     )

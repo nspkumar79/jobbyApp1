@@ -1,0 +1,100 @@
+.job-card-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto';
+  border-radius: 10px;
+  background-color: #272727;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  list-style-type: none;
+  cursor: pointer;
+  outline: none;
+}
+.card-logo-title-container {
+  display: flex;
+  align-items: center;
+}
+.company-logo {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 18px;
+  margin-top: 0;
+}
+.rating-container {
+  display: flex;
+}
+.rating {
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0;
+}
+.star {
+  color: #fbbf24;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+.location-type-package-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.location-type-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.location-container {
+  display: flex;
+  align-items: center;
+  margin-right: 7px;
+}
+.location-logo {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+  margin-right: 4px;
+}
+.location {
+  color: #ffffff;
+  font-size: 16px;
+}
+.employment-type-container {
+  display: flex;
+  align-items: center;
+}
+.bag {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+  margin-right: 4px;
+}
+.type {
+  color: #ffffff;
+  font-size: 16px;
+}
+.package {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+}
+.hr-line {
+  width: 100%;
+  border-top: 1px solid #cbd5e1;
+}
+.description-title {
+  color: #f1f5f9;
+  font-size: 18px;
+}
+.description {
+  color: #f1f5f9;
+  font-size: 17px;
+}

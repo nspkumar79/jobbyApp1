@@ -1,0 +1,344 @@
+.job-item-details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  min-height: 85vh;
+}
+
+.job-details-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+.job-error-view-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48px;
+  padding-bottom: 64px;
+}
+
+@media screen and (min-width: 768px) {
+  .job-error-view-container {
+    margin-top: 0px;
+    margin-left: 30px;
+    width: 70%;
+    padding-bottom: 0;
+  }
+}
+
+.job-failure-img {
+  width: 250px;
+  height: 200px;
+}
+
+@media screen and (min-width: 768px) {
+  .job-failure-img {
+    width: 400px;
+    height: 350px;
+  }
+}
+
+.job-failure-heading-text {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+@media screen and (min-width: 768px) {
+  .job-failure-heading-text {
+    font-size: 24px;
+  }
+}
+
+.job-failure-description {
+  text-align: center;
+  color: #64748b;
+  font-family: 'Roboto';
+  font-size: 14px;
+  width: 90%;
+  max-width: 288px;
+  line-height: 1.3;
+}
+
+@media screen and (min-width: 768px) {
+  .job-failure-description {
+    font-size: 18px;
+    width: 60%;
+    max-width: 466px;
+  }
+}
+.retry-button-job {
+  border: none;
+  background-color: #6366f1;
+  color: #ffffff;
+  font-size: 24px;
+  border-radius: 5px;
+  padding: 6px;
+}
+.job-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto';
+  background-color: #000000;
+}
+.responsive-job-card-container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto';
+  border-radius: 10px;
+  background-color: #272727;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+@media only screen and (min-width: 768px) {
+  .responsive-job-card-container {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+}
+.card-logo-title-container {
+  display: flex;
+  align-items: center;
+}
+.company-logo {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 18px;
+  margin-top: 0;
+}
+.rating-container {
+  display: flex;
+}
+.rating {
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0;
+}
+.star {
+  color: #fbbf24;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+.location-type-package-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.location-type-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.location-container {
+  display: flex;
+  align-items: center;
+  margin-right: 7px;
+}
+.location-logo {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+  margin-right: 4px;
+}
+.location {
+  color: #ffffff;
+  font-size: 16px;
+}
+.employment-type-container {
+  display: flex;
+  align-items: center;
+}
+.bag {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+  margin-right: 4px;
+}
+.type {
+  color: #ffffff;
+  font-size: 16px;
+}
+.package {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+}
+.hr-line {
+  width: 100%;
+  border-top: 1px solid #cbd5e1;
+}
+.description-title {
+  color: #f1f5f9;
+  font-size: 18px;
+  font-weight: bold;
+}
+.description {
+  color: #f1f5f9;
+  font-size: 17px;
+  margin-top: 0;
+}
+@media only screen and (min-width: 768px) {
+  .description-title {
+    color: #f1f5f9;
+    font-size: 22px;
+  }
+  .description {
+    margin-bottom: 30px;
+  }
+}
+.description-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.description-link-container {
+  display: flex;
+  align-items: center;
+}
+.visit-link {
+  color: #6366f1;
+  font-size: 16px;
+  text-decoration: none;
+}
+.external-link-logo {
+  width: 16px;
+  height: 16px;
+  color: #6366f1;
+  margin-left: 6px;
+}
+.skill-heading {
+  color: #f1f5f9;
+  font-size: 18px;
+}
+.skills-item-container {
+  padding-left: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.skill-list-item {
+  width: 45%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+@media only screen and (min-width: 768px) {
+  .skill-heading {
+    color: #f1f5f9;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+  .skill-list-item {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 55px;
+  }
+}
+.skill-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+.skill-name {
+  color: #f1f5f9;
+  font-size: 17px;
+  font-weight: 500;
+}
+@media only screen and (min-width: 768px) {
+  .skill-image {
+    width: 75px;
+    height: 75px;
+    margin-right: 15px;
+  }
+  .skill-name {
+    color: #f1f5f9;
+    font-size: 22px;
+    font-weight: 500;
+  }
+}
+.life-heading {
+  color: #f1f5f9;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+.life-item-container {
+  display: flex;
+  flex-direction: column;
+}
+.life-description {
+  color: #f1f5f9;
+  font-size: 17px;
+}
+.life-image {
+  width: 100%;
+}
+@media only screen and (min-width: 768px) {
+  .life-item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .life-description-container {
+    width: 60%;
+  }
+  .life-image-container {
+    width: 37%;
+  }
+  .life-heading {
+    color: #f1f5f9;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  .life-description {
+    color: #f1f5f9;
+    font-size: 17px;
+    margin-top: 0;
+  }
+}
+.similar-responsive-container {
+  width: 90%;
+}
+.similar-job-items-list-container {
+  padding-left: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.similar-heading {
+  color: #f1f5f9;
+  font-size: 18px;
+}
+@media only screen and (min-width: 768px) {
+  .similar-heading {
+    color: #f1f5f9;
+    font-size: 22px;
+    font-weight: bold;
+  }
+}

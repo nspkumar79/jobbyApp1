@@ -3,7 +3,17 @@ import {BsSearch} from 'react-icons/bs'
 import './index.css'
 
 const SearchFilter = props => {
-  const {searchInput, onChangeSearchInput, onEnterSearchInput} = props
+  const {searchInput, changeSearchInput, enterSearchInput} = props
+
+  const onEnterSearchInput = event => {
+    if (event.key === 'Enter') {
+      enterSearchInput()
+    }
+  }
+
+  const onChangeSearchInput = event => {
+    changeSearchInput(event.target.value)
+  }
 
   return (
     <>

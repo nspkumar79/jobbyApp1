@@ -107,7 +107,7 @@ class AllJobsSection extends Component {
     })
     const jwtToken = Cookies.get('jwt_token')
     const {searchInput, activeEmploymentId, activePackageId} = this.state
-    const apiUrl = 'https://apis.ccbp.in/jobs'
+    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=FULLTIME,PARTTIME&minimum_package=${activePackageId}&search=`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -125,10 +125,15 @@ class AllJobsSection extends Component {
         packagePerAnnum: job.package_per_annum,
         rating: job.rating,
         title: job.title,
+        id: job.id,
       }))
 
       this.setState({
-        jobsList: updatedData,
+        jobsList: updatedData.filter(eachItem => {
+          const {title} = eachItem
+          const titleCase = title.toLowerCase()
+          return titleCase.includes(searchInput.toLowerCase())
+        }),
         apiStatus: apiStatusConstants.success,
       })
     } else {
@@ -138,11 +143,11 @@ class AllJobsSection extends Component {
     }
   }
 
-  onEnterSearchInput = () => {
+  enterSearchInput = () => {
     this.getJobs()
   }
 
-  onChangeSearchInput = searchInput => {
+  changeSearchInput = searchInput => {
     this.setState({searchInput})
   }
 
@@ -242,16 +247,25 @@ class AllJobsSection extends Component {
     }
   }
 
+  changeActiveEmploymentId = value => {
+    console.log(value)
+    this.setState({activeEmploymentId: value})
+  }
+
+  changeActivePackageId = activePackageId => {
+    this.setState({activePackageId}, this.getJobs)
+  }
+
   render() {
-    const {searchInput} = this.state
+    const {searchInput, activeEmploymentId} = this.state
     return (
       <div className="all-jobs-section">
         <div className="all-jobs-responsive-container">
           <div className="search-container-mobile">
             <SearchFilter
               searchInput={searchInput}
-              changeSearchInput={this.onChangeSearchInput}
-              enterSearchInput={this.onEnterSearchInput}
+              changeSearchInput={this.changeSearchInput}
+              enterSearchInput={this.enterSearchInput}
             />
           </div>
           <div className="user-filter-container">
@@ -260,11 +274,18 @@ class AllJobsSection extends Component {
             <FiltersGroup
               employmentTypesList={employmentTypesList}
               salaryRangesList={salaryRangesList}
+              changeActivePackageId={this.changeActivePackageId}
+              activeEmploymentId={activeEmploymentId}
+              changeActiveEmploymentId={this.changeActiveEmploymentId}
             />
           </div>
           <div className="jobs-container">
             <div className="search-container-large">
-              <SearchFilter />
+              <SearchFilter
+                searchInput={searchInput}
+                changeSearchInput={this.changeSearchInput}
+                enterSearchInput={this.enterSearchInput}
+              />
             </div>
             {this.renderAllJobs()}
           </div>

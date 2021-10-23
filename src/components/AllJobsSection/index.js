@@ -107,7 +107,7 @@ class AllJobsSection extends Component {
     })
     const jwtToken = Cookies.get('jwt_token')
     const {searchInput, activeEmploymentId, activePackageId} = this.state
-    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=FULLTIME,PARTTIME&minimum_package=${activePackageId}&search=`
+    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${activeEmploymentId}&minimum_package=${activePackageId}&search=${searchInput}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -129,11 +129,7 @@ class AllJobsSection extends Component {
       }))
 
       this.setState({
-        jobsList: updatedData.filter(eachItem => {
-          const {title} = eachItem
-          const titleCase = title.toLowerCase()
-          return titleCase.includes(searchInput.toLowerCase())
-        }),
+        jobsList: updatedData,
         apiStatus: apiStatusConstants.success,
       })
     } else {
@@ -153,12 +149,25 @@ class AllJobsSection extends Component {
 
   renderJobsListView = () => {
     const {jobsList} = this.state
-    return (
+    const shouldShowJobsList = jobsList.length > 0
+    return shouldShowJobsList ? (
       <ul className="job-items-list-container">
         {jobsList.map(eachJob => (
           <JobCard eachJob={eachJob} />
         ))}
       </ul>
+    ) : (
+      <div className="no-jobs-view">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+          className="no-jobs-img"
+          alt="no jobs"
+        />
+        <h1 className="no-jobs-heading">No Jobs Found</h1>
+        <p className="no-jobs-description">
+          We could not find any jobs. Try other filters.
+        </p>
+      </div>
     )
   }
 
@@ -258,6 +267,7 @@ class AllJobsSection extends Component {
 
   render() {
     const {searchInput, activeEmploymentId} = this.state
+
     return (
       <div className="all-jobs-section">
         <div className="all-jobs-responsive-container">

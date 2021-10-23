@@ -9,6 +9,7 @@ import Loader from 'react-loader-spinner'
 
 import Header from '../Header'
 import SimilarJobItem from '../SimilarJobItem'
+import SkillList from '../SkillList'
 
 import './index.css'
 
@@ -85,8 +86,7 @@ class JobItemDetails extends Component {
         similarJobsData: updatedSimilarJobsData,
         apiStatus: apiStatusConstants.success,
       })
-    }
-    if (response.status === 404) {
+    } else {
       this.setState({
         apiStatus: apiStatusConstants.failure,
       })
@@ -112,7 +112,11 @@ class JobItemDetails extends Component {
       <div className="job-card-container">
         <div className="responsive-job-card-container">
           <div className="card-logo-title-container">
-            <img src={companyLogoUrl} alt="" className="company-logo" />
+            <img
+              src={companyLogoUrl}
+              alt="job details company logo"
+              className="company-logo"
+            />
             <div className="title-container">
               <h1 className="title">{title}</h1>
               <div className="rating-container">
@@ -158,14 +162,7 @@ class JobItemDetails extends Component {
             <h1 className="skill-heading">Skills</h1>
             <ul className="skills-item-container">
               {skillData.map(eachSkill => (
-                <li className="skill-list-item">
-                  <img
-                    src={eachSkill.skillImageUrl}
-                    alt=""
-                    className="skill-image"
-                  />
-                  <p className="skill-name">{eachSkill.name}</p>
-                </li>
+                <SkillList eachSkill={eachSkill} key={eachSkill.name} />
               ))}
             </ul>
           </div>
@@ -178,7 +175,7 @@ class JobItemDetails extends Component {
               <div className="life-image-container">
                 <img
                   src={lifeAtCompanyImageUrl}
-                  alt=""
+                  alt="life at company"
                   className="life-image"
                 />
               </div>
@@ -208,7 +205,7 @@ class JobItemDetails extends Component {
         />
         <h1 className="job-failure-heading-text">Oops! Something Went Wrong</h1>
         <p className="job-failure-description">
-          We cannot seem to find the page you are looking for.
+          We cannot seem to find the page you are looking for
         </p>
         <button
           type="button"
@@ -247,7 +244,7 @@ class JobItemDetails extends Component {
             <h1 className="similar-heading">Similar Jobs</h1>
             <ul className="similar-job-items-list-container">
               {similarJobsData.map(eachJob => (
-                <SimilarJobItem eachJob={eachJob} />
+                <SimilarJobItem eachJob={eachJob} key={eachJob.id} />
               ))}
             </ul>
           </div>

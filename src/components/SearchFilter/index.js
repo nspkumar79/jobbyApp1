@@ -15,6 +15,10 @@ const SearchFilter = props => {
     changeSearchInput(event.target.value)
   }
 
+  const onClickedSearch = () => {
+    enterSearchInput()
+  }
+
   return (
     <>
       <input
@@ -25,7 +29,14 @@ const SearchFilter = props => {
         onChange={onChangeSearchInput}
         onKeyDown={onEnterSearchInput}
       />
-      <BsSearch className="search-icon" />
+      <button
+        className="search-button"
+        type="button"
+        testid="searchButton"
+        onClick={onClickedSearch}
+      >
+        <BsSearch className="search-icon" />
+      </button>
     </>
   )
 }

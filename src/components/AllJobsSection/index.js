@@ -60,7 +60,7 @@ class AllJobsSection extends Component {
     profileData: {},
     apiStatus: apiStatusConstants.initial,
     apiProfileStatus: apiStatusConstants.initial,
-    activeEmploymentId: '',
+    activeEmploymentId: [],
     activePackageId: '',
     searchInput: '',
   }
@@ -107,7 +107,7 @@ class AllJobsSection extends Component {
     })
     const jwtToken = Cookies.get('jwt_token')
     const {searchInput, activeEmploymentId, activePackageId} = this.state
-    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${activeEmploymentId}&minimum_package=${activePackageId}&search=${searchInput}`
+    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${activeEmploymentId.join()}&minimum_package=${activePackageId}&search=${searchInput}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -257,8 +257,24 @@ class AllJobsSection extends Component {
   }
 
   changeActiveEmploymentId = value => {
-    console.log(value)
-    this.setState({activeEmploymentId: value})
+    const {activeEmploymentId} = this.state
+    const ifPresent = activeEmploymentId.some(item => item === value)
+    if (ifPresent) {
+      const updatedActiveEmploymentId = activeEmploymentId.filter(
+        item => item !== value,
+      )
+      this.setState(
+        {activeEmploymentId: updatedActiveEmploymentId},
+        this.getJobs,
+      )
+    } else {
+      this.setState(
+        prevState => ({
+          activeEmploymentId: [...prevState.activeEmploymentId, value],
+        }),
+        this.getJobs,
+      )
+    }
   }
 
   changeActivePackageId = activePackageId => {
@@ -266,8 +282,7 @@ class AllJobsSection extends Component {
   }
 
   render() {
-    const {searchInput, activeEmploymentId} = this.state
-
+    const {searchInput} = this.state
     return (
       <div className="all-jobs-section">
         <div className="all-jobs-responsive-container">
@@ -285,7 +300,6 @@ class AllJobsSection extends Component {
               employmentTypesList={employmentTypesList}
               salaryRangesList={salaryRangesList}
               changeActivePackageId={this.changeActivePackageId}
-              activeEmploymentId={activeEmploymentId}
               changeActiveEmploymentId={this.changeActiveEmploymentId}
             />
           </div>

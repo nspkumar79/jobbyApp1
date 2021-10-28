@@ -1,18 +1,8 @@
-import {Component} from 'react'
 import './index.css'
 
-class FiltersGroup extends Component {
-  state = {
-    employmentCheckboxList: {
-      FULLTIME: false,
-      PARTIME: false,
-      FREELANCE: false,
-      INTERNSHIP: false,
-    },
-  }
-
-  renderSalaryFilterList = () => {
-    const {salaryRangesList, changeActivePackageId} = this.props
+const FiltersGroup = props => {
+  const renderSalaryFilterList = () => {
+    const {salaryRangesList, changeActivePackageId} = props
 
     const onChangedRadio = event => {
       changeActivePackageId(event.target.value)
@@ -35,22 +25,18 @@ class FiltersGroup extends Component {
     ))
   }
 
-  renderSalaryFilter = () => (
+  const renderSalaryFilter = () => (
     <>
       <h1 className="salary-heading">Salary Range</h1>
-      <ul className="salary-list">{this.renderSalaryFilterList()}</ul>
+      <ul className="salary-list">{renderSalaryFilterList()}</ul>
     </>
   )
 
-  renderEmploymentFilterList = () => {
-    const {
-      employmentTypesList,
-      changeActiveEmploymentId,
-      activeEmploymentId,
-    } = this.props
+  const renderEmploymentFilterList = () => {
+    const {employmentTypesList, changeActiveEmploymentId} = props
 
-    const onClickedCheckbox = event => {
-      const {value, checked} = event.target
+    const onChangedCheckbox = event => {
+      changeActiveEmploymentId(event.target.value)
     }
 
     return employmentTypesList.map(eachItem => (
@@ -61,6 +47,7 @@ class FiltersGroup extends Component {
           className="checkbox"
           name={eachItem.employmentTypeId}
           value={eachItem.employmentTypeId}
+          onChange={onChangedCheckbox}
         />
         <label className="checkboxLabel" htmlFor={eachItem.employmentTypeId}>
           {eachItem.label}
@@ -69,22 +56,19 @@ class FiltersGroup extends Component {
     ))
   }
 
-  renderEmploymentFilter = () => (
+  const renderEmploymentFilter = () => (
     <>
       <h1 className="employment-heading">Type of Employment</h1>
-      <ul className="employment-list">{this.renderEmploymentFilterList()}</ul>
+      <ul className="employment-list">{renderEmploymentFilterList()}</ul>
     </>
   )
-
-  render() {
-    return (
-      <div className="filters-group-container">
-        {this.renderEmploymentFilter()}
-        <hr className="hr-line" />
-        {this.renderSalaryFilter()}
-      </div>
-    )
-  }
+  return (
+    <div className="filters-group-container">
+      {renderEmploymentFilter()}
+      <hr className="hr-line" />
+      {renderSalaryFilter()}
+    </div>
+  )
 }
 
 export default FiltersGroup
